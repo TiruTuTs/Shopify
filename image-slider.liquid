@@ -1,0 +1,86 @@
+
+<div class="container">
+
+  <h2 class="text-center">I want to add Images Only</h2>
+
+  <div class="responsive">
+
+    {% for block in section.blocks %}
+
+    <img class="px-3" src="{{ block.settings.blockpics | img_url: 'master' }}" width={images.width} height={images.height} >
+
+    {% endfor %}
+    
+  </div>
+  
+</div>
+
+
+{% schema %}
+  {
+    "name": "Image Slider",
+    "settings": [],
+    "blocks" : [
+      {
+        "type" : "images",
+        "name" : "Block Images",
+        "settings" : [
+          {
+          "type" : "image_picker",
+          "id" : "blockpics",
+          "label" : "Add Images Block"
+          }
+        ]
+      }
+    ],
+    "presets" : [
+      {
+        "name" : "Image Only"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+
+  $('.responsive').slick({
+  dots: true,
+  infinite: true,
+    autoplay: true,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+});
+  
+{% endjavascript %}
